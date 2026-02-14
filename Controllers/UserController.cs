@@ -62,7 +62,6 @@ namespace UserManagement.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserCommand command)
         {
-            // On lie l'ID de l'URL à la commande
             command.Id = id;
 
             try
