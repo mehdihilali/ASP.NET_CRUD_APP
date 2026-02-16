@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using UserManagement.Data;
+using UserManagement.Exceptions;
 
 namespace UserManagement.Features.Commands.Update
 {
@@ -19,7 +20,7 @@ namespace UserManagement.Features.Commands.Update
                 .FindAsync(request.Id, cancellationToken);
 
             if (user is null)
-                throw new KeyNotFoundException($"User with ID {request.Id} not found");
+                throw new NotFoundException("User", request.Id);
 
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;

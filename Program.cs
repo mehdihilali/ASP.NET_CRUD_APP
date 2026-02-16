@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 using UserManagement.Data;
 using UserManagement.Mapping;
+using UserManagement.Middleware;
 using UserManagement.Repository;
 using UserManagement.Services;
 using UserManagement.Validators;
@@ -56,6 +57,9 @@ builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
 
 var app = builder.Build();
+
+// Middleware d'erreurs (DOIT ÊTRE PLACÉ AVANT LES AUTRES MIDDLEWARES)
+app.UseGlobalExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
